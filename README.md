@@ -11,7 +11,7 @@
 **1. Clone the application**
 
 ```bash
-git clone https://gitlab.mynisum.com/abogari/liquibaseexample.git
+git clone https://github.com/AmarBogari/LiquibaseExample.git
 ```
 
 **2. Run the Application**
