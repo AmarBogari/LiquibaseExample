@@ -1,0 +1,48 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="Amar" id="061-changelog">
+        <!-- preConditions for  useraddress.country4 column is not there then add new column-->
+        <preConditions>
+            <not>
+                <columnExists tableName="useraddress" columnName="country4"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="useraddress" schemaName="userschema">
+            <column name="country4" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet author="Amar" id="062-changelog">
+        <!-- preConditions for  account table is not there then create account table -->
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="account"/>
+            </not>
+        </preConditions>
+        <createTable tableName="account">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="version" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="balance" type="DECIMAL(19,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_updated" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="firstname" type="VARCHAR(255)"/>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

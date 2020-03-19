@@ -1,0 +1,21 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="Amar" id="061-changelog">
+        <!-- preConditions for  useraddress.country4 column is not there then add new column-->
+        <preConditions>
+            <not>
+                <columnExists tableName="useraddress" columnName="country4"/>
+            </not>
+        </preConditions>
+
+        <addColumn tableName="useraddress" schemaName="userschema">
+            <column name="countryname" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+
+
+</databaseChangeLog>

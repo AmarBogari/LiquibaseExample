@@ -1,0 +1,52 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="Amar" id="01-changelog">
+
+        <comment>creating users and addresses table in userschema </comment>
+
+        <createTable tableName="users" schemaName="userschema" >
+            <column name="id" type="int">
+                <constraints  nullable="false" />
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="email" type="varchar(100)" />
+            <column name="phone" type="int" />
+            <column name="address" type="int">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <createTable tableName="addresses" schemaName="userschema">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="street" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="city" type="varchar(100)" />
+            <column name="state" type="varchar(100)" />
+            <column name="pin" type="int" />
+        </createTable>
+
+        <addPrimaryKey columnNames="id"
+                       constraintName="pk_userId"
+                       schemaName="userschema"
+                       tableName="users"/>
+
+        <addForeignKeyConstraint baseColumnNames="address"
+                                 baseTableName="users"
+                                 baseTableSchemaName="userschema"
+                                 constraintName="fk_user_address"
+                                 referencedColumnNames="id"
+                                 referencedTableName="addresses"
+                                 referencedTableSchemaName="userschema"
+                                 />
+    </changeSet>
+
+</databaseChangeLog>
